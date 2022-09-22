@@ -1,0 +1,36 @@
+%%section 1 (creating pitches)
+pitchDur = 1;
+fS = 8000;
+timeArray = 0:1/fS:pitchDur;
+f0 = 0;
+A = 1;
+pitchA = A*sin(2*pi*timeArray*freqPitch(2,1)+f0);
+pitchB = A*sin(2*pi*timeArray*freqPitch(1,1)+f0);
+pitchC = A*sin(2*pi*timeArray*freqPitch(7,1)+f0);
+pitchD = A*sin(2*pi*timeArray*freqPitch(6,1)+f0);
+pitchE = A*sin(2*pi*timeArray*freqPitch(5,1)+f0);
+pitchF = A*sin(2*pi*timeArray*freqPitch(4,1)+f0);
+pitchG = A*sin(2*pi*timeArray*freqPitch(3,1)+f0);
+
+%% section 2 (Read the file with pitches)
+reading = fopen ('song.txt', 'r');
+formaSpec = '%s';
+song = fscanf(reading,formatSpec);
+fclose(reading);
+n = whos(song);
+%% section 3(Create the song and the file.wav)
+sigSong = [...
+pitchF pitchC pitchF pitchC pitchF...
+pitchE pitchE pitchE pitchC pitchE...
+pitchC pitchE pitchF pitchF pitchF...
+pitchC pitchF pitchC pitchF pitchE...
+pitchE pitchE pitchC pitchE pitchC pitchF];
+sound (sigSong);
+audiowrite ('firstsong.wav', sigSong, fS);
+audioWavInfo = audioinfo('firstSong.wav');
+wavFileName = audioWavInfo.Filename;
+wavFileCompMet = audioWavInfo.CompressionMethod;
+wavFileNumCh = audioWavInfo.NumChannels;
+wavFileRate = audioWavInfo.SampleRate;
+wavFileSamples = imgPngInfo.TotalSamples;
+wavFileDur = imgPngInfo.Duration;
